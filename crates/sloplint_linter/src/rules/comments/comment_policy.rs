@@ -41,7 +41,7 @@ impl Rule for CommentPolicy {
         diagnostics.push(
             Diagnostic::new(
                 self.code(),
-                "comment is not allowed (comments are banned by default; allow specific paths in config)",
+                "comment is not allowed (comments are banned)",
                 range,
                 Severity::Warning,
             )

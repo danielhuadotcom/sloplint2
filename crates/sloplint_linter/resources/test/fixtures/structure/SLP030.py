@@ -39,3 +39,32 @@ def translate(path):
         return open(path).read()
     except Exception as exc:
         raise RuntimeError("could not read") from exc
+
+
+def narrow_but_trivial(path):
+    try:
+        return open(path).read()
+    except FileNotFoundError:
+        pass
+
+
+def narrow_but_logs(path):
+    try:
+        return open(path).read()
+    except FileNotFoundError:
+        logging.error("missing")
+
+
+def bare_with_real_body(path):
+    try:
+        return open(path).read()
+    except:
+        return ""
+
+
+def narrow_and_substantial(path):
+    try:
+        return open(path).read()
+    except FileNotFoundError:
+        logging.exception("missing")
+        return ""

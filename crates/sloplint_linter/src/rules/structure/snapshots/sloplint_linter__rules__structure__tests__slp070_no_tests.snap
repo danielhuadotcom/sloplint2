@@ -1,0 +1,13 @@
+---
+source: crates/sloplint_linter/src/rules/structure/mod.rs
+expression: rendered
+---
+2:1 SLP070 [warning] importing test framework `pytest` is not allowed (test code is banned)
+3:1 SLP070 [warning] importing test framework `unittest` is not allowed (test code is banned)
+4:1 SLP070 [warning] importing test framework `unittest` is not allowed (test code is banned)
+8:1 SLP070 [warning] test function `test_parses_empty_input` is not allowed (test code is banned)
+12:1 SLP070 [warning] test function `test_async_path` is not allowed (test code is banned)
+16:1 SLP070 [warning] test function `test` is not allowed (test code is banned)
+24:1 SLP070 [warning] test class `TestParser` is not allowed (test code is banned)
+25:5 SLP070 [warning] test function `test_method` is not allowed (test code is banned)
+29:1 SLP070 [warning] test class `TestCaseRunner` is not allowed (test code is banned)

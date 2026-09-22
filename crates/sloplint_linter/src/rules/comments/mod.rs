@@ -1,6 +1,8 @@
 //! Comment & docstring rules.
 //!
 //! - `SLP010` comment policy — comments banned by default (stable).
+//! - `SLP011` docstring policy — docstrings banned (stable).
+//! - `SLP012` noqa policy — `# noqa` banned (stable).
 //! - `SLP050` ASCII-only source (stable).
 //! - `SLP001` redundant "what" comment (preview — heuristic).
 //! - `SLP002` redundant docstring (preview — heuristic).
@@ -8,6 +10,8 @@
 pub mod ascii_only;
 pub mod comment_policy;
 pub mod comment_tells;
+pub mod docstring_policy;
+pub mod noqa_policy;
 pub mod redundant_comment;
 pub mod redundant_docstring;
 
@@ -21,6 +25,18 @@ mod tests {
         comment_policy::CommentPolicy,
         "comments",
         "SLP010"
+    );
+    test_rule!(
+        slp011_docstring_policy,
+        docstring_policy::DocstringPolicy,
+        "comments",
+        "SLP011"
+    );
+    test_rule!(
+        slp012_noqa_policy,
+        noqa_policy::NoqaPolicy,
+        "comments",
+        "SLP012"
     );
     test_rule!(
         slp050_ascii_only,

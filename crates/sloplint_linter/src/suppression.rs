@@ -15,6 +15,10 @@
 //! output) equals the comment's line, exactly the line Ruff scopes a `# noqa` to. A whole-tree
 //! clone (SLP020) is reported at each end, so silencing a whole pair takes a `# noqa` at each end.
 //!
+//! `SLP012` bans the directive outright; where it is enabled, `# noqa` stops being an available
+//! escape hatch and config (`ignore`, per-path `overrides`) is the only one left. A `# noqa` never
+//! suppresses `SLP012` itself.
+//!
 //! Interop: Ruff reads the *same* `# noqa` comments. Since `SLP*` aren't Ruff codes, set
 //! `external = ["SLP"]` in your Ruff config so RUF100 (unused-noqa) preserves them. Symmetrically,
 //! sloplint only looks at its own `SLP*` codes here and never reports on Ruff directives like
@@ -92,11 +96,24 @@ impl Suppressions {
     }
 
     fn is_suppressed(&self, diagnostic: &Diagnostic) -> bool {
+        if diagnostic.code == NOQA_BAN_CODE {
+            return false;
+        }
         let reported_line = self.line_index.line_index(diagnostic.range.start()).get();
         self.directives
             .iter()
             .any(|(line, codes)| *line == reported_line && codes.allows(&diagnostic.code))
     }
+}
+
+/// The code of the rule that bans `# noqa` outright. A `# noqa` never suppresses it: a directive
+/// that excused its own ban would make the rule vacuous. Config (`ignore`, per-path `overrides`)
+/// remains the way to turn it off.
+pub const NOQA_BAN_CODE: &str = "SLP012";
+
+/// Whether a comment's raw text carries a `# noqa` directive, in any of its accepted forms.
+pub fn is_noqa(comment: &str) -> bool {
+    parse_noqa(comment).is_some()
 }
 
 /// Parse a `# noqa[: CODES]` directive from a comment's raw text, or `None` if it isn't one.

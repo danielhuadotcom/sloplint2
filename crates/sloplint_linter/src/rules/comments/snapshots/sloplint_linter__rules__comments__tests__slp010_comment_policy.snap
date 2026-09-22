@@ -2,6 +2,6 @@
 source: crates/sloplint_linter/src/rules/comments/mod.rs
 expression: rendered
 ---
-2:1 SLP010 [warning] comment is not allowed (comments are banned by default; allow specific paths in config)
-3:12 SLP010 [warning] comment is not allowed (comments are banned by default; allow specific paths in config)
-8:1 SLP010 [warning] comment is not allowed (comments are banned by default; allow specific paths in config)
+2:1 SLP010 [warning] comment is not allowed (comments are banned)
+3:12 SLP010 [warning] comment is not allowed (comments are banned)
+8:1 SLP010 [warning] comment is not allowed (comments are banned)

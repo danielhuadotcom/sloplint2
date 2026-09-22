@@ -1,0 +1,16 @@
+---
+source: crates/sloplint_linter/src/rules/structure/mod.rs
+expression: rendered
+---
+8:5 SLP181 [warning] import nested inside a block is not allowed (imports must be plain statements at module top level)
+10:5 SLP181 [warning] import nested inside a block is not allowed (imports must be plain statements at module top level)
+13:5 SLP181 [warning] import nested inside a block is not allowed (imports must be plain statements at module top level)
+17:5 SLP181 [warning] import nested inside a block is not allowed (imports must be plain statements at module top level)
+20:5 SLP181 [warning] import nested inside a block is not allowed (imports must be plain statements at module top level)
+23:5 SLP181 [warning] import nested inside a block is not allowed (imports must be plain statements at module top level)
+27:12 SLP181 [warning] dynamic import `import_module` is not allowed (dynamic imports are banned)
+31:12 SLP181 [warning] dynamic import `__import__` is not allowed (dynamic imports are banned)
+35:5 SLP181 [warning] import inside a function or class body is not allowed (imports must be plain statements at module top level)
+42:16 SLP181 [warning] dynamic import `import_module` is not allowed (dynamic imports are banned)
+50:5 SLP181 [warning] import inside a function or class body is not allowed (imports must be plain statements at module top level)
+55:9 SLP181 [warning] import inside a function or class body is not allowed (imports must be plain statements at module top level)

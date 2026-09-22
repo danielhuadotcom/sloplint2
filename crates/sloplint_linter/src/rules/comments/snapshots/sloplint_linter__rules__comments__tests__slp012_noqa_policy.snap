@@ -1,0 +1,9 @@
+---
+source: crates/sloplint_linter/src/rules/comments/mod.rs
+expression: rendered
+---
+1:12 SLP012 [warning] `# noqa` is not allowed (noqa directives are banned)
+3:22 SLP012 [warning] `# noqa` is not allowed (noqa directives are banned)
+4:12 SLP012 [warning] `# noqa` is not allowed (noqa directives are banned)
+5:14 SLP012 [warning] `# noqa` is not allowed (noqa directives are banned)
+6:14 SLP012 [warning] `# noqa` is not allowed (noqa directives are banned)

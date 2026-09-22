@@ -25,12 +25,16 @@ macro_rules! map_codes {
 map_codes! {
     // Comments
     Stable => rules::comments::comment_policy::CommentPolicy,
+    Stable => rules::comments::docstring_policy::DocstringPolicy,
+    Stable => rules::comments::noqa_policy::NoqaPolicy,
     Stable => rules::comments::ascii_only::AsciiOnly,
     Preview => rules::comments::redundant_comment::RedundantComment,
     Preview => rules::comments::redundant_docstring::RedundantDocstring,
     Preview => rules::comments::comment_tells::CommentTells,
     // Structure
     Stable => rules::structure::defensive_except::DefensiveExcept,
+    Stable => rules::structure::no_tests::NoTests,
+    Stable => rules::structure::hidden_imports::HiddenImports,
     Stable => rules::structure::oversized_file::OversizedFile,
     Stable => rules::structure::deep_nesting::DeepNesting,
     Preview => rules::structure::redundant_type_hint::RedundantTypeHint,

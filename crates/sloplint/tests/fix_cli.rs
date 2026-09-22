@@ -131,13 +131,17 @@ fn one_unwritable_file_does_not_abort_the_batch() {
 #[test]
 fn directive_comments_are_never_fixed() {
     // Tool directives / suppressions are exempt from SLP010, so --fix must leave them in place.
+    // SLP012 reports the `# noqa` but offers no fix, so the file still comes back byte-identical.
     let project = make_project("directives");
     let original = "x = 1  # noqa: E501\n# type: ignore\ny = 2\n";
     write(&project, "a.py", original);
 
-    let (_, stderr, code) = run(&project, &["check", "a.py", "--fix"]);
+    let (stdout, stderr, code) = run(&project, &["check", "a.py", "--fix"]);
 
-    assert_eq!(code, 0, "stderr: {stderr}");
     assert!(stderr.contains("fixed 0 issue(s)"), "stderr: {stderr}");
     assert_eq!(read(&project, "a.py"), original);
+    // The only finding is the noqa ban; the `# type: ignore` directive stays exempt.
+    assert!(stdout.contains("SLP012"), "stdout: {stdout}");
+    assert!(!stdout.contains("SLP010"), "stdout: {stdout}");
+    assert_ne!(code, 0, "an unfixed finding should fail the run: {stderr}");
 }

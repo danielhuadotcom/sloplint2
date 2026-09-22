@@ -1,0 +1,8 @@
+---
+source: crates/sloplint_linter/src/rules/comments/mod.rs
+expression: rendered
+---
+1:1 SLP011 [warning] module docstring is not allowed (docstrings are banned)
+5:5 SLP011 [warning] docstring is not allowed (docstrings are banned)
+14:5 SLP011 [warning] docstring is not allowed (docstrings are banned)
+17:9 SLP011 [warning] docstring is not allowed (docstrings are banned)

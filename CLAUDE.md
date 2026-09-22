@@ -1,5 +1,9 @@
 # CLAUDE.md
 
+> **Vendored fork.** This tree diverges from upstream sloplint and does not honor upstream's
+> guarantees. Where this file's original principles conflict with a maintainer's instruction, the
+> instruction wins; the principles below describe the architecture, not a contract.
+
 Guidance for AI agents (Claude Code and friends) working in this repo. Human-facing contribution
 rules live in [`CONTRIBUTING.md`](CONTRIBUTING.md) — read both; this file adds the project context,
 architecture map, and the workflow an agent should follow.
@@ -7,8 +11,8 @@ architecture map, and the workflow an agent should follow.
 ## What this is
 
 **sloplint** is a fast, deterministic, **no-LLM** linter that counters AI slop in Python. It runs
-*after* [Ruff](https://docs.astral.sh/ruff/) in the same CI job and **never re-checks what Ruff
-already covers**. It has two halves:
+*after* [Ruff](https://docs.astral.sh/ruff/) in the same CI job. Overlap with Ruff is allowed: a
+rule here enforces this tree's policy whether or not Ruff ships an equivalent. It has two halves:
 
 - **Software-quality metrics** (`sloplint metrics`) — a deterministic measurement layer
   (complexity, cohesion, coupling, architecture, duplication, test substance). This is the
@@ -24,12 +28,15 @@ full-fidelity AST + token stream.
    does it rather than inventing. Ruff `0.15.18` is vendored locally at
    `~/.cargo/git/checkouts/ruff-*/<rev>/crates` — read it before making a design decision. Don't
    ask the user to choose a design that Ruff has already settled; match Ruff and say so.
-2. **Slop is badness, not provenance.** Rules target *bad code*, never "this looks AI-written."
+2. **Overlap with Ruff is permitted.** Mirroring Ruff's *design* (above) is still the rule;
+   declining to implement a check because Ruff has one is not. Where a rule duplicates a Ruff
+   rule, say so in its docs and move on.
+3. **Slop is badness, not provenance.** Rules target *bad code*, never "this looks AI-written."
    Reject any heuristic that flags authorship rather than a concrete defect. (E.g. generated code
    is segregated from metrics because its numbers are *noise*, not because it's "slop".)
-3. **Determinism.** No LLM, no randomness, reproducible output. Everything is static analysis over
+4. **Determinism.** No LLM, no randomness, reproducible output. Everything is static analysis over
    the AST/token stream.
-4. **Hold our own source to the bar we enforce** — see `CONTRIBUTING.md` (comment policy, tests).
+5. **Hold our own source to the bar we enforce** — see `CONTRIBUTING.md` (comment policy, tests).
 
 ## Repo map
 

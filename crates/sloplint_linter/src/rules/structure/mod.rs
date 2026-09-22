@@ -3,9 +3,11 @@
 //! - `SLP030` overly defensive try/except (stable).
 //! - `SLP040` redundant type hint (preview — heuristic).
 //! - `SLP060` verbose mechanical naming (preview — heuristic).
+//! - `SLP070` test code banned (stable).
 //! - `SLP080` oversized file (stable).
 //! - `SLP082` deep nesting — control flow (stable).
 //! - `SLP084` deep data-structure nesting — expression tree (preview — heuristic).
+//! - `SLP181` imports hidden from a top-level scan — nested, deferred, or dynamic (stable).
 //! - `SLP130` literal-dispatch / isinstance ladder (preview — heuristic).
 //!
 //! (`SLP090` flat-directory fanout is a whole-tree analysis handled in the CLI, not a
@@ -15,6 +17,8 @@ pub mod deep_data_nesting;
 pub mod deep_nesting;
 pub mod defensive_except;
 pub mod dispatch_ladder;
+pub mod hidden_imports;
+pub mod no_tests;
 pub mod oversized_file;
 pub mod redundant_type_hint;
 pub mod verbose_naming;
@@ -45,6 +49,13 @@ mod tests {
     );
     // SLP080 needs a small line limit, so its snapshots pass an explicit `Limits`: the
     // 4-line fixture flags when over the ceiling and is silent exactly at it.
+    test_rule!(
+        slp181_hidden_imports,
+        hidden_imports::HiddenImports,
+        "structure",
+        "SLP181"
+    );
+    test_rule!(slp070_no_tests, no_tests::NoTests, "structure", "SLP070");
     test_rule!(
         slp080_over_limit,
         oversized_file::OversizedFile,

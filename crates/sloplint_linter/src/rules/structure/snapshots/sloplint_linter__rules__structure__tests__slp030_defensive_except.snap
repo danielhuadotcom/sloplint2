@@ -2,6 +2,11 @@
 source: crates/sloplint_linter/src/rules/structure/mod.rs
 expression: rendered
 ---
-4:5 SLP030 [warning] broad except whose body only passes, logs, or re-raises adds no value
-11:5 SLP030 [warning] broad except whose body only passes, logs, or re-raises adds no value
-18:5 SLP030 [warning] broad except whose body only passes, logs, or re-raises adds no value
+4:5 SLP030 [warning] overly defensive exception (exception type too broad or body too trivial)
+11:5 SLP030 [warning] overly defensive exception (exception type too broad or body too trivial)
+18:5 SLP030 [warning] overly defensive exception (exception type too broad or body too trivial)
+32:5 SLP030 [warning] overly defensive exception (exception type too broad or body too trivial)
+40:5 SLP030 [warning] overly defensive exception (exception type too broad or body too trivial)
+47:5 SLP030 [warning] overly defensive exception (exception type too broad or body too trivial)
+54:5 SLP030 [warning] overly defensive exception (exception type too broad or body too trivial)
+61:5 SLP030 [warning] overly defensive exception (exception type too broad or body too trivial)

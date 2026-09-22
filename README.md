@@ -1,9 +1,14 @@
 # sloplint
 
+> **This is a vendored fork.** It diverges from upstream sloplint and keeps none of the upstream
+> guarantees — not the rule set, the default severities, the config schema, or the promise of
+> non-overlap with Ruff. Pin it by commit; do not expect upstream release notes to describe it.
+
 A fast, deterministic, **no-LLM** linter that counters AI slop in Python — a deliberately
 nitpicking, opinionated layer that runs **right after [Ruff](https://docs.astral.sh/ruff/)**
-in the same CI job. Ruff handles standard linting; sloplint adds the strict, slop-specific
-judgments Ruff intentionally won't ship, and **never re-checks anything Ruff already covers**.
+in the same CI job. Ruff handles standard linting; sloplint adds strict, slop-specific judgments
+Ruff won't ship. Rules here may overlap Ruff's: this fork enforces its policy independently of
+which Ruff rule set a consumer happens to enable.
 
 Written in Rust, reusing Ruff's own parser crates for a full-fidelity AST + token stream.
 
@@ -62,9 +67,13 @@ Rules that flag slop patterns no mainstream linter covers today. **Stable** rule
 | Rule | Stability | What it flags |
 | --- | --- | --- |
 | `SLP010` | stable | Comments — **banned by default** (relax per-path in `sloplint.toml`) |
+| `SLP011` | stable | Docstrings — **banned** (module, class, function, method) |
+| `SLP012` | stable | `# noqa` directives — **banned**; not suppressible by `# noqa` |
 | `SLP020` | stable | Cross-file duplicate / near-duplicate functions — copy-paste *and* "same logic, slightly different" |
 | `SLP030` | stable | Overly defensive `try`/`except` |
 | `SLP050` | stable | Non-ASCII source (e.g. emoji) |
+| `SLP070` | stable | Test code — **banned** (`pytest`/`unittest` imports, `test_*` functions, `Test*` classes) |
+| `SLP181` | stable | Imports hidden from a top-level scan — nested in a block, deferred into a function or class body, or dynamic (`__import__`, `import_module`) |
 | `SLP080` | stable | Oversized files (default: > 400 lines, via `file_max_lines`) |
 | `SLP082` | stable | Deep control-flow nesting inside a function (default: > 4 levels, via `nesting_max_depth`) |
 | `SLP090` | stable | Flat-directory fanout — too many `.py` modules in one directory (default: > 15, via `dir_max_modules`) |
