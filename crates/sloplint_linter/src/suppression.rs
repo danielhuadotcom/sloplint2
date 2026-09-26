@@ -111,11 +111,6 @@ impl Suppressions {
 /// remains the way to turn it off.
 pub const NOQA_BAN_CODE: &str = "SLP012";
 
-/// Whether a comment's raw text carries a `# noqa` directive, in any of its accepted forms.
-pub fn is_noqa(comment: &str) -> bool {
-    parse_noqa(comment).is_some()
-}
-
 /// Parse a `# noqa[: CODES]` directive from a comment's raw text, or `None` if it isn't one.
 fn parse_noqa(comment: &str) -> Option<Codes> {
     let body = comment.trim_start_matches('#').trim_start();

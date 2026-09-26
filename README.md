@@ -68,7 +68,7 @@ Rules that flag slop patterns no mainstream linter covers today. **Stable** rule
 | --- | --- | --- |
 | `SLP010` | stable | Comments — **banned by default** (relax per-path in `sloplint.toml`) |
 | `SLP011` | stable | Docstrings — **banned** (module, class, function, method) |
-| `SLP012` | stable | `# noqa` directives — **banned**; not suppressible by `# noqa` |
+| `SLP012` | stable | Lint suppressions (`# noqa`, `# ruff: noqa`, `# ruff: disable[...]`, `# isort: skip`) — **banned**; not suppressible by `# noqa` |
 | `SLP020` | stable | Cross-file duplicate / near-duplicate functions — copy-paste *and* "same logic, slightly different" |
 | `SLP030` | stable | Overly defensive `try`/`except` |
 | `SLP050` | stable | Non-ASCII source (e.g. emoji) |
