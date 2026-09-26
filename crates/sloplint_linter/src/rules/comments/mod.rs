@@ -2,7 +2,7 @@
 //!
 //! - `SLP010` comment policy — comments banned by default (stable).
 //! - `SLP011` docstring policy — docstrings banned (stable).
-//! - `SLP012` noqa policy — `# noqa` banned (stable).
+//! - `SLP012` noqa policy — `# noqa` and other lint suppressions banned (stable).
 //! - `SLP050` ASCII-only source (stable).
 //! - `SLP001` redundant "what" comment (preview — heuristic).
 //! - `SLP002` redundant docstring (preview — heuristic).
